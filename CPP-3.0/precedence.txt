@@ -1,0 +1,27 @@
+--------------------------------------------------
+|  				Operators			| Associative|
+|------------------------------------------------|
+| () [] -> .						| Left2Right |
+| ! - ++ -- + - * & (type) sizeof	| Right2Left |
+| * / %								| Left2Right |
+| + -								| Left2Right |
+| << >>								| Left2Right |
+| < <= > >= 						| Left2Right |
+| ++ !=								| Left2Right |
+| &									| Left2Right |
+| ^									| Left2Right |
+| !									| Left2Right |
+| &&								| Left2Right |
+| ||								| Left2Right |
+| ?:								| Right2Left |
+| = += -= /= %= &= ^= |= <<= >=     | Right2Left |
+| ,									| Left2Right |
+--------------------------------------------------
+
+* derefrencing
+& address of
+
+# uniary have high precedence over arithmatic
+
+7*-5 => -
+5-7*8 => *
