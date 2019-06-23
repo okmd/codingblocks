@@ -2,7 +2,7 @@
 using namespace std;
 
 int main() {
-    int n,max=1000000000,a;
+    long long int n,max=1000000000,a;
     cin>>n;
     while(n--)
     {
@@ -10,9 +10,14 @@ int main() {
         if(a>max){ // if we get large value than previous
             max=a;
             break;
+        }else if(a==max){
+            cout<<"false\n";
+            return 0;
         }
-        max=a;            
+        max=a;  
+        //cout<<max<<endl;          
     }
+    n++;
     while(n--)
     {
         cin>>a;
@@ -37,6 +42,6 @@ Input:
     4
     0
 Output:
-    3
+    false
 
 */
