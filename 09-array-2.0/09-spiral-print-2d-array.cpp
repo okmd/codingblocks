@@ -1,30 +1,61 @@
 #include<iostream>
 #include <cstring>
 using namespace std;
-void spiralPrint(int a[][10], int R, int C){
+
+void spiralPrintAntiClock(int a[][10], int R, int C){
+	int sR = 0, eR = R-1, sC = 0, eC =C-1;
+	while(sR<=eR and sC<=eC){
+		// print start row, sr to sc
+		for(int i=sR;i<=eR; i++)
+			cout<<a[i][sC]<<", ";
+		sC++;
+
+		// print end col, sR to eR
+		for(int i=sC;i<=eC; i++)
+			cout<<a[eR][i]<<", ";
+		eR--;
+
+		// print end row, ec to sc
+		if(eC>sC){
+			for(int i=eR;i>=sR; i--)
+				cout<<a[i][eC]<<", ";
+			eC--;
+		}
+
+		// print start col, er to sr
+		if(sC<eC){
+			for(int i=eC;i>=sC; i--)
+				cout<<a[sR][i]<<", ";
+			sR++;	
+		}
+	}
+	return;
+}
+
+void spiralPrintClock(int a[][10], int R, int C){
 	int sR = 0, eR = R-1, sC = 0, eC =C-1;
 	while(sR<=eR and sC<=eC){
 		// print start row, sr to sc
 		for(int i=sC;i<=eC; i++)
-			cout<<a[sR][i]<<" ";
+			cout<<a[sR][i]<<", ";
 		sR++;
 
 		// print end col, sR to eR
 		for(int i=sR;i<=eR; i++)
-			cout<<a[i][eC]<<" ";
+			cout<<a[i][eC]<<", ";
 		eC--;
 
 		// print end row, ec to sc
 		if(eR>sR){
 			for(int i=eC;i>=sC; i--)
-				cout<<a[eR][i]<<" ";
+				cout<<a[eR][i]<<", ";
 			eR--;
 		}
 
 		// print start col, er to sr
 		if(sC<eC){
 			for(int i=eR;i>=sR; i--)
-				cout<<a[i][sC]<<" ";
+				cout<<a[i][sC]<<", ";
 			sC++;	
 		}
 	}
@@ -51,7 +82,7 @@ int main(){
 	}
 
 	// spiral print
-	spiralPrint(a,R,C);
+	spiralPrintClock(a,R,C);
 	
 	cout<<endl;
 	return 0;

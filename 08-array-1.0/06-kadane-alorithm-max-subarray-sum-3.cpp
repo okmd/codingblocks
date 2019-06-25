@@ -25,11 +25,8 @@ int main(){
 	}
 
 	
-	cout<<"Array having max sum: ";
-	for(int i=left;i<=right;i++){
-		cout<<arr[i]<<",";
-	}
-	cout<<"\nMaximum sum is: "<<max_sum<<endl;
+
+	cout<<"Maximum sum is: "<<ms<<endl;
 
 	return 0;
 }
