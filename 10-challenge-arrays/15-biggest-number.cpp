@@ -28,7 +28,7 @@ int main(){
 }
 
 /*
-Problem: Maximum length Biotonic Subarray.
+Problem: Form biggest number
 
 Input:
 1
@@ -38,5 +38,13 @@ Input:
 Output:
 
 6054854654
+Input:
+1
+8
+1 34 3 98 9 76 45 4
+
+Output:
+
+998764543431
 
 */
