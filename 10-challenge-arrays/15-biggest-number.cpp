@@ -4,7 +4,7 @@
 using namespace std;
 
 bool compare(string a, string b){
-	return a>b;
+	return a+b>b+a; // for 98 and 9 = a+b 989, b+a = 998
 }
 int max_number(string arr[], int n){
 	sort(arr,arr+n,compare);
