@@ -1,12 +1,17 @@
 #include <iostream>
 using namespace std;
+int findUnique1(int a[], int n){
+	int result  = 0;
+	for(int i=0;i<n;i++)
+		result ^= a[i];
 
-void findUnique(int a[], int n){
+	return result; 
+}
+
+void findUnique2(int a[], int n){
 	int i = 0, first = 0, second = 0, result = 0;
 	// xor all array
-	for(int i=0;i<n;i++){
-		result^=a[i];
-	}
+	result = findUnique1(a,n);
 	//get the set bit
 	int temp = result;
 	while(temp){
@@ -29,6 +34,28 @@ void findUnique(int a[], int n){
 	cout<<"1st: "<<first<<" 2nd: "<<second<<endl;
 }
 
+int findUnique3(int a[], int n){
+	int cnt[64]={0};
+	int ans = 0, p = 1;
+	for(int i=0;i<n;i++){
+		// extract bit and count and update
+		int j=0;
+		int no = a[i];
+		while(no){
+			cnt[j++] += (no&1); // for 6, 110 array will have 011
+			no >>= 1;
+		}
+	}
+	// take mod 3 of array
+	for(int i=0;i<64;i++){
+		cnt[i] %= 3;
+		ans +=  cnt[i]*p; // mutiplying each bit to its place value to get decimal value.
+		p <<= 1;// multiply by 2; 1,2,4,8,16..; place value
+	}
+
+	return ans;
+}
+
 int main(){
 	int n;//=8;
 	cin>>n;
@@ -37,7 +64,9 @@ int main(){
 	for(int i=0;i<n;i++)
 		cin>>a[i];
 	// find unique
-	findUnique(a,n);
+	//cout<<findUnique1(a,n)<<endl;
+	//findUnique2(a,n);
+	cout<<findUnique3(a,n)<<endl;
 	
 	return 0;
 }

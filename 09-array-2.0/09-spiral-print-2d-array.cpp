@@ -46,14 +46,14 @@ void spiralPrintClock(int a[][10], int R, int C){
 		eC--;
 
 		// print end row, ec to sc
-		if(eR>sR){
+		if(sR<=eR){
 			for(int i=eC;i>=sC; i--)
 				cout<<a[eR][i]<<", ";
 			eR--;
 		}
 
 		// print start col, er to sr
-		if(sC<eC){
+		if(sC<=eC){
 			for(int i=eR;i>=sR; i--)
 				cout<<a[i][sC]<<", ";
 			sC++;	
