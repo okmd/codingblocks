@@ -2,7 +2,7 @@
 #include <cstring>
 using namespace std;
 #define ll long long int
-#define limit 5000005 
+#define limit 100000005 
 
 int prime[limit], sieve[limit];
 void makeSieve(){
