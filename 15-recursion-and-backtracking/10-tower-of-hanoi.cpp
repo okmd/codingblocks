@@ -7,7 +7,7 @@ void toh(int n, char sour, char dest, char help){
 	// recursive calls
 	// move n-1 to help from source.
 	toh(n-1, sour, help, dest);
-	cout<<"Move "<<n<<" disks from "<<sour<<" to "<<dest<<endl;
+	cout<<"Move "<<n<<"th disc from "<<sour<<" to "<<dest<<endl;
 	// revert back to source from helper
 	toh(n-1, help, dest, sour);
 
