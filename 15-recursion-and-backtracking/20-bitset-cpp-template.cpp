@@ -9,3 +9,11 @@ int main(){
 	cout<<b<<endl;
 	return 0;
 }
+
+/*
+It take only one bit to represent 1 bit.
+while normal bool variable take 1 Byte.
+It is effient in time and space.
+Here index start from right.
+
+*/
