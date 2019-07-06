@@ -13,7 +13,7 @@ void print_borad(int board[][board_size], int n){
 		cout<<endl;
 	}
 }
-bool isSafe(int board[][board_size], int i, int j, int n){
+bool isSafe(int board[][board_size], int i, int j, int n){ //O(n)
 	// check column, fixed col and row change
 	for(int row = 0; row<i; row++){
 		if(board[row][j]){ // if already a queen
