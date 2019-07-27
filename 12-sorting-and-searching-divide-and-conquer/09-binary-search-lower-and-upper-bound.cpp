@@ -63,4 +63,5 @@ Note: array is sorted;
 Recursive approah may take o(long(n)) space while
 iterative approach take o(1) space.
 
+Note: lower_bound, upper_boud are defined in algorithm.
 */
