@@ -9,7 +9,7 @@ class Vector{
 		int cur_size; 	// 0
 		T * pointer; 	// NULL
 	public:
-		Vector():max_size(5),cur_size(0){
+		Vector(int size=10):max_size(size),cur_size(0){
 			pointer = new T[max_size];
 		}
 		void push_back(T value){
@@ -24,7 +24,7 @@ class Vector{
 				}
 				pointer = pointer1;
 				pointer[cur_size++] = value;// insert value
-
+				delete [] pointer1;
 			}
 		}
 		T pop_back(){
@@ -36,19 +36,21 @@ class Vector{
 			cur_size = v.cur_size;
 			pointer = v.pointer;
 		}
-		void operator + (Vector &v){
-			int i;
-			if(cur_size + v.cur_size > max_size)
-				max_size += v.max_size;
+		Vector* operator + (Vector &v){
+			Vector *k = new Vector(cur_size + v.cur_size);
+			k->pointer = new T[k->max_size];
+			for(int i=0; i<cur_size;i++)
+				k->pointer[k->cur_size++] = pointer[i];
 
-			T *pointer1 = new T[max_size+1];
-			for(i=0; i<cur_size;i++){
-				pointer1[i] = pointer[i];
-			}
 			for(int i=0; i<v.cur_size;i++)
-				pointer1[cur_size++] = v.pointer[i];
-			pointer = pointer1;
-			
+				k->pointer[k->cur_size++] = v.pointer[i];
+			return k;
+		}
+		void operator ()(string s){
+			cout<<s<<endl;
+		}
+		T& operator [](int index){
+			return pointer[index];
 		}
 		void reserve(const int n){
 			max_size = n;
@@ -65,9 +67,13 @@ class Vector{
 		}
 
 };
+ostream & operator << (ostream &os, Vector<int> &v){
+	v.print();
+	return os;
+}
 
 int main(){
-	Vector<int> a,b;
+	Vector<int> a,b,*c;
 	a.push_back(1);
 	a.push_back(2);
 	a.push_back(3);
@@ -81,9 +87,16 @@ int main(){
 	b.push_back(9);
 	b.push_back(9);
 	b.print();
-	a+b;
+	c=a+b;
 	a.print();
-	b.print();
+	cout<<b;//b.print();
+	c->print();
+	// functional object 
+	Vector<int> fun;
+	fun("Hello function");
+	// []
+	a[1]+=10;
+	a.print();
 
 	return 0;
 }
