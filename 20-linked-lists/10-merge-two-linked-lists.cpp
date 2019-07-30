@@ -5,17 +5,13 @@ using namespace std;
 
 int main(){
 	LL a,b;
-	a.insert_at_head(1);
-	a.insert_at_head(2);
-	a.insert_at_head(3);
-	a.insert_at_head(4);
+	a.make_list();
 	a.print();
-	b.insert_at_head(5);
-	b.insert_at_head(6);
-	b.insert_at_head(7);
-	b.insert_at_head(8);
+	b.make_list();
 	b.print();
 	// merge
+	LL *c = a.merge(&b);
+	c->print();
 
 	return 0;
 }
