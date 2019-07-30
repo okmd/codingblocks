@@ -5,6 +5,44 @@ class Node{
 		int data;
 		Node * next;
 		Node(int value=0):data(value), next(NULL){}
+		Node* merge(Node *n){
+			if(!this) return n;
+			if(!n) return this;
+			Node* c;
+			if(this->data < n->data){
+				c = this;
+				c->next = this->next->merge(n);
+			}else{
+				c = n;
+				c->next = this->merge(n->next);
+			}
+			return c;
+		}
+		Node* merge_sort(){
+			// base case
+			if(!this or !this->next) return this; // NULL
+			// mid point and break
+			Node* mid = this->mid_point();
+			Node* a = this;
+			Node* b = mid->next;
+			mid->next = NULL; // break list
+			// sort
+			a = a->merge_sort();
+			b = b->merge_sort();
+			//merge
+			return a->merge(b);
+		}
+		Node* mid_point(){
+			Node *slow = this;
+			if(!slow or !slow->next) return slow; // empty or one element
+			Node *fast= this->next; // atleast 2 elements
+			while(fast and fast->next){
+				fast = fast->next->next;
+				slow = slow->next;
+			}
+			return slow;
+		}
+
 };
 
 class LL{
@@ -13,6 +51,7 @@ class LL{
 		//Node * tail;
 	public:
 		LL():head(NULL){}//, tail(NULL){}
+		LL(Node* h):head(h){}
 		Node* get_head() const {
 			return this->head;
 		}
@@ -50,6 +89,10 @@ class LL{
 		int operator[](Node *n){
 			if(n) return n->data;
 		}
+		LL* merge(LL*);
+		LL* merge_sort();
+		bool cycle();
+		void remove_cycle();
 		
 };
 
@@ -177,14 +220,7 @@ void LL::recursive_reverse(Node *curr){
 // Runner technique to find mid point
 // even length have two mid points, odd have one mid point
 Node* LL::mid_point(){
-	Node *slow = this->head;
-	if(!slow or !slow->next) return this->head; // empty or one element
-	Node *fast= this->head->next; // atleast 2 elements
-	while(fast and fast->next){
-		fast = fast->next->next;
-		slow = slow->next;
-	}
-	return slow;
+	return this->head->mid_point();
 
 }
 // In single pass, find kth element from end
@@ -200,8 +236,42 @@ Node* LL::kth_node_from_end(int k){
 	return slow;
 }
 
-// Merge tow linked lists without using extra space
+// Merge tow sorted linked lists without using extra space
+LL* LL::merge(LL *l){
+	Node *l1 = this->head;
+	Node *l2 = l->head;
+	return new LL(l1->merge(l2));
 
+}
+// Merge sort, unsorted array
+LL* LL::merge_sort(){
+	return new LL(this->head->merge_sort());
+}
+// Folyd's cycle
+bool LL::cycle(){
+	Node* slow = head;
+	Node* fast = head;
+	while(fast and fast->next){
+		fast = fast->next->next;
+		slow = slow->next;
+		if(fast == slow) return true;
+	}
+	return false;
+
+}
+// remove cycle
+void LL::remove_cycle(){
+	Node* slow = head;
+	Node* fast = head;
+	while(fast and fast->next){
+		fast = fast->next->next;
+		slow = slow->next;
+		if(fast == slow){
+			return ;
+		}
+	}
+	return;
+}
 /*
 	Data structures: Linked list
 */
