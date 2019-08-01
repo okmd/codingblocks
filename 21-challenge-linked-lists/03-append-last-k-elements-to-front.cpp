@@ -45,11 +45,13 @@ void LL::print(){
 	cout<<endl;
 }
 void LL::append_at_front(int k){
-	if(k>=this->len()) return ;
-
+	int n = this->len();
+	if(k>n)
+		k = k%n;
 	Node* temp = head, *t = head;
 	while(temp and k--)
 		temp = temp->next;
+    if(!temp) return;
 	while(temp->next){
 		temp = temp->next;
 		t = t->next;
