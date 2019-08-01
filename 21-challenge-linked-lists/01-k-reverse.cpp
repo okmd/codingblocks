@@ -7,12 +7,15 @@ public:
 	Node(int val=0):data(val), next(NULL){}
 };
 class LL{
-public:
 	Node* head;
+public:
 	LL():head(NULL){}
+	Node* get_head()const{
+		return head;
+	}
 	void insert_at_tail(int);
 	void reverse();
-	void k_reverse(int);
+	Node* k_reverse(Node*, int);
 	void print();
 };
 void LL::insert_at_tail(int value){
@@ -27,10 +30,22 @@ void LL::insert_at_tail(int value){
 	}
 	temp->next = n;
 }
-void LL::k_reverse(int k){
-		Node *curr = head;
-		Node *next, *prev=NULL;
-		// to be continued..
+Node* LL::k_reverse(Node* root, int k){
+	int i = k;
+	Node *curr = root, *prev = NULL, *nxt;
+	while(curr and i--){
+		nxt = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = nxt;
+	}
+	if(nxt)
+		root->next = k_reverse(nxt, k);
+	if(head == root){// on coming back
+		head = prev;
+		return (Node*)NULL;
+	}
+	return prev;
 
 }
 void LL::print(){
@@ -53,14 +68,16 @@ void LL::reverse(){
 	this->head = prev;
 }
 int main(){
-	int n,k,v;
-	cin>>n>>k;
+	int n=9,k=3,v=1;
+	//cin>>n>>k;
 	LL l;
 	for(int i=0; i<n; i++){
-		cin>>v;
-		l.insert_at_tail(v);
+		//cin>>v;
+		l.insert_at_tail(v++);
 	}
 	l.print();
 	l.reverse();
+	l.print();
+	l.k_reverse(l.get_head(), k);
 	l.print();
 }
