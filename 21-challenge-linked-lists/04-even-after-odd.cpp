@@ -12,7 +12,7 @@ public:
 	LL(Node* head=(Node*)NULL):head(head){}
 	void insert_at_tail(int);
 	void print();
-	void append_at_front(int);
+	void even_after_odd();
 	int len(){
 		int c=0;
 		Node *temp = head;
@@ -44,29 +44,28 @@ void LL::print(){
 	}
 	cout<<endl;
 }
-void LL::append_at_front(int k){
+void LL::even_after_odd(){
 	
 
 }
 int main(){
-	int k, n, v;
+	int n, v;
 	LL a;
 	cin>>n;
 	for(int i =0; i<n; i++){
 		cin>>v;
 		a.insert_at_tail(v);
 	}
-	cin>>k;
-	a.append_at_front(k);
+	a.even_after_odd();
 	a.print();
 	
 }
 
 /*
-9
-1 2 3 4 5 6 7 8 9
-3
+5
+1 2 2 2 1 
 
 Output:
-7 8 9 1 2 3 4 5 6
+1 1 2 2 2
+
 */

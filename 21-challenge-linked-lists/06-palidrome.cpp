@@ -1,12 +1,11 @@
 #include <iostream>
-#include <set>
+#include <stack>
 using namespace std;
 class Node{
 	public:
 		int data;
 		Node * next;
 		Node(int value=0):data(value), next(NULL){}
-
 };
 
 class LL{
@@ -16,16 +15,9 @@ class LL{
 	public:
 		LL():head(NULL){}//, tail(NULL){}
 		LL(Node* h):head(h){}
-		void print(){
-			Node *temp = head;
-			while(temp){
-				cout<<temp->data<<" ";
-				temp = temp->next;
-			}
-			cout<<endl;
-		}
 		void insert_at_tail(int);
 		void make_list();
+		void is_palindromic();
 		
 };
 
@@ -45,28 +37,44 @@ void LL::insert_at_tail(int value){
 
 void LL::make_list(){
 	// insert till -1
-	int n;
+	int n,v;
 	cin>>n;
-	set<int> s;
-	while(n!=-1){
-		if(s.find(n) ==s.end()){
-			this->insert_at_tail(n);
-			s.insert(n);
-		}
-		cin>>n;
+	for(int i=0; i<n; i++){
+		cin>>v;
+		this->insert_at_tail(v);
 	}
+}
+void LL::is_palindromic(){
+	Node* temp = head;
+	stack<int> st;
+	while(temp){
+		st.push(temp->data);
+		temp = temp->next;
+	}
+	temp = head;
+	while(temp){
+		if(temp->data != st.top())
+			cout<<"False\n";
+			return;
+		st.pop();
+		temp = temp->next;
+	}
+	cout<<"True\n";
 }
 
 int main(){
 	LL a;
 	a.make_list();
-	a.print();
+	a.is_palindromic();
 	return 0;
 }
 
 /*
-Input: 1 2 3 4 5 2 3 -1
+Input: 
+5
+1 2 3 6 8
+Output: False
 
-Output: 1 2 3 4 5
+Note: Not any output for True
 */
 

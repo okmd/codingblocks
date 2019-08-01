@@ -45,6 +45,10 @@ public:
 		}
 		return temp->terminal;
 	}
+
+	void prefix(string word){
+		
+	}
 };
 
 int main(){

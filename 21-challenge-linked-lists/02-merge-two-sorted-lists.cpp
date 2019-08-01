@@ -11,7 +11,10 @@ public:
 		Node* c;
 		if(this->data < n->data){
 			c = this;
-			c->next = this->next->merge(n);
+            if(this->next)
+			    c->next = this->next->merge(n);
+            else
+                c->next = n;
 		}else{
 			c = n;
 			c->next = this->merge(n->next);
@@ -52,6 +55,8 @@ void LL::print(){
 	cout<<endl;
 }
 LL* LL::merge(LL *l){
+	if(!this->head) return l;
+	if(!l->head) return this;
 	return new LL(this->head->merge(l->head));
 
 }
