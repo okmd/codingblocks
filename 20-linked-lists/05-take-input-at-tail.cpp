@@ -4,7 +4,7 @@ using namespace std;
 
 int main(){
 	LL in;
-	in.make_list();
+	in.make_list(6);
 	in.print();
 	cout<<"Size: "<<in.length()<<endl;
 	return 0;
