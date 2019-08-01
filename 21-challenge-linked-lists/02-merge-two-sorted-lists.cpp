@@ -27,8 +27,6 @@ public:
 		return head;
 	}
 	void insert_at_tail(int);
-	void reverse();
-	Node* k_reverse(Node*, int);
 	void print();
 	LL* merge(LL*);
 };
