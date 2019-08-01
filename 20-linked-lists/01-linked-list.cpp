@@ -80,7 +80,7 @@ class LL{
 		void delete_from_tail();
 		bool linear_search(int);
 		bool recursive_search(Node*, int);
-		void make_list();
+		void make_list(int);
 		void reverse();
 		void recursive_reverse(Node*);
 		Node* mid_point();
@@ -91,6 +91,7 @@ class LL{
 		}
 		LL* merge(LL*);
 		LL* merge_sort();
+		void add_cycle(int, int);// start and end position of cycle
 		bool cycle();
 		void remove_cycle();
 		
@@ -183,14 +184,13 @@ bool LL::recursive_search(Node *p, int value){
 	if(temp->data == value) return true;
 	return recursive_search(temp->next, value);
 }
-void LL::make_list(){
+void LL::make_list(int k){
 	// insert till -1
-	cout<<"Enter Elements till -1 to list: ";
+	cout<<"Enter elements: ";
 	int n;
-	cin>>n;
-	while(n!=-1){
-		this->insert_at_tail(n);
+	for(int i=0; i<k; i++){
 		cin>>n;
+		this->insert_at_tail(n);
 	}
 }
 // problem Solving
@@ -247,6 +247,16 @@ LL* LL::merge(LL *l){
 LL* LL::merge_sort(){
 	return new LL(this->head->merge_sort());
 }
+// add a cycle at pos
+void LL::add_cycle(int start, int end){
+	Node* temp = this->head;
+	while(--start and temp)
+		temp = temp->next;
+	Node* temp1 = this->head;
+	while(--end and temp1)
+		temp1 = temp1->next;
+	temp1->next = temp;
+}
 // Folyd's cycle
 bool LL::cycle(){
 	Node* slow = head;
@@ -263,14 +273,20 @@ bool LL::cycle(){
 void LL::remove_cycle(){
 	Node* slow = head;
 	Node* fast = head;
+	bool cycle = false;
 	while(fast and fast->next){
 		fast = fast->next->next;
 		slow = slow->next;
 		if(fast == slow){
-			return ;
+			cycle = true;
+			break;
 		}
 	}
-	return;
+	slow = head;
+	while(cycle and slow->next!=fast){
+		slow = slow->next;
+	}
+	slow->next = NULL; // remove cycle
 }
 /*
 	Data structures: Linked list
