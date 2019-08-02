@@ -41,41 +41,18 @@ Node* make_list(){
 	return root;
 }
 
-Node* even_after_odd(Node* root){
-	Node *temp = root, *eh=NULL, *oh=NULL, *et=NULL, *ot=NULL;
-    if(!root) return NULL;
-	while(temp){
-		if(temp->data &1){
-			if(!oh)
-				oh = ot = temp;
-			else{
-				ot->next = temp;
-				ot = temp;
-			}
-		}else{
-			if(!eh)
-				eh = et = temp;
-			else{
-				et->next = temp;
-				et = temp;
-			}
-		}
-		temp = temp->next;
-	}
-	if(!oh){
-		et->next = NULL;
-		return eh;
-	}
-	ot->next = eh;
-	if(et)
-		et->next = NULL;
-	return oh;
+Node* sort(Node* root){
+	Node *temp = root, *head = root;
+	if(!root return) NULL;
+	if(!root->next) return root;
+	root = root->next;
+	// rest is remaining
 
 }
 
 int main(){
 	Node *a = make_list();
-	a = even_after_odd(a);
+	a = sort(a);
 	print(a);
 	
 }

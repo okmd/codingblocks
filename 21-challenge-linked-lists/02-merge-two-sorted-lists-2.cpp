@@ -9,6 +9,25 @@ public:
 		next = NULL;
 	}
 };
+
+Node* merge(Node *a, Node *b){
+	if(!a) return b;
+	if(!b) return a;
+	Node *c;
+	if(a->data < b->data){
+		c = a;
+		if(a->next)
+			c->next = merge(a->next, b);
+		else
+			c->next = b;
+	}else{
+		c = b;
+		c->next = merge(a, b->next);
+		
+	}
+	return c;
+}
+
 void print(Node *root){
 	if(!root) return;
 	while(root){
@@ -41,50 +60,14 @@ Node* make_list(){
 	return root;
 }
 
-Node* even_after_odd(Node* root){
-	Node *temp = root, *eh=NULL, *oh=NULL, *et=NULL, *ot=NULL;
-    if(!root) return NULL;
-	while(temp){
-		if(temp->data &1){
-			if(!oh)
-				oh = ot = temp;
-			else{
-				ot->next = temp;
-				ot = temp;
-			}
-		}else{
-			if(!eh)
-				eh = et = temp;
-			else{
-				et->next = temp;
-				et = temp;
-			}
-		}
-		temp = temp->next;
-	}
-	if(!oh){
-		et->next = NULL;
-		return eh;
-	}
-	ot->next = eh;
-	if(et)
-		et->next = NULL;
-	return oh;
-
-}
-
 int main(){
-	Node *a = make_list();
-	a = even_after_odd(a);
-	print(a);
-	
+	int t;
+	cin>>t;
+	while(t--){
+		Node *a = make_list();
+		Node *b = make_list();
+		Node *c = merge(a,b);
+		print(c);
+	}
+	return 0;
 }
-
-/*
-5
-1 2 2 2 1 
-
-Output:
-1 1 2 2 2
-
-*/
