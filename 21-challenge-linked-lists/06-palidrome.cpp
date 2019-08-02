@@ -53,9 +53,10 @@ void LL::is_palindromic(){
 	}
 	temp = head;
 	while(temp){
-		if(temp->data != st.top())
+		if(temp->data != st.top()){
 			cout<<"False\n";
 			return;
+		}
 		st.pop();
 		temp = temp->next;
 	}
