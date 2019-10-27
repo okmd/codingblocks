@@ -21,10 +21,7 @@ void print_span(int arr[], int n){
 	for (int i = 0; i < n; ++i){
 		cout<<ans[i]<<" ";
 	}
-
 	cout<<endl; // new line
-
-
 }
 
 int main(){
@@ -37,3 +34,8 @@ int main(){
 	
 	return 0;
 }
+
+/*
+Span of each day is the kth day before current day whose price is greater than current day. 
+
+*/
