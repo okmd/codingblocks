@@ -11,6 +11,3 @@ int main(){
 	cout<<multiply(n,m)<<endl;
 	return 0;
 }
-
-/*
-*/
