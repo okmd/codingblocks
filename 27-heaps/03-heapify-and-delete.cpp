@@ -2,19 +2,43 @@
 #include "02-build-and-insert-heap.cpp"
 using namespace std;
 
+void Heap::heapify(int i){
+    int left = 2*i;
+    int right = left+1;
+    // assume minindex is i
+    int minIndex = i;
+    if(left < v.size() and compare(v[left], v[i])){
+        minIndex = left;
+    }
+    if(right < v.size() and compare(v[right], v[minIndex])){
+        minIndex = right;
+    }
+
+    if(minIndex!=i){//someone if min
+        swap(v[i], v[minIndex]);
+        heapify(minIndex);
+    }
+}
 void Heap::pop(){
-    // to be continued..
+    int last = v.size()-1;
+    swap(v[1], v[last]);
+    v.pop_back();
+    heapify(1);
 }
 
 int main(){
-    Heap h(false); // false-max heap, true-min heap.
+    Heap h(true); // false-max heap, true-min heap.
     h.push(5);
     h.push(15);
     h.push(2);
     h.push(20);
     h.push(3);
-    h.pop();
-    cout<<h.top()<<endl;
+    //h.pop();
+    //cout<<h.top()<<endl;
+    while(!h.empty()){
+        cout<<h.top()<<" ";
+        h.pop();
+    }
 
     return 0;
 }

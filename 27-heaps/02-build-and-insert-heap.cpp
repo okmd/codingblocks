@@ -11,6 +11,7 @@ class Heap{
             else
                 return a>b; // max heap
         }
+    void heapify(int);
     public:
         Heap(bool type=true){
             minHeap = type;
