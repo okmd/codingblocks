@@ -38,5 +38,12 @@ Hashing types:
         -> quadratic probing.
     -> double hashing.
 
-TODO: rehashing
+Rehashing: O(n) as values are copied
+    -> done when the linked list size become large.
+    -> increase the size of array to get more space.
+    -> it is decided based on load factor
+    -> double the size of current table (nearest prime).
+
+Load factor:
+    -> current_size / total size
 */

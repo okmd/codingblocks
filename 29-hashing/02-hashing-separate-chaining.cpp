@@ -12,6 +12,10 @@ class Node{
             this->key = key;
             this->value = value;
         }
+        ~Node(){
+            if(next)
+                delete next; // recursive delete from end to front of ith bucket.
+        }
 };
 
 template<typename T>
@@ -32,6 +36,30 @@ class HashTable{
             }
             return ans;
         }
+        void rehash(){
+            Node<T> ** oldbuckets = buckets;
+            int oldTs = ts;
+            ts = 2*ts; // get nearest prime numbers
+            cs = 0;
+            buckets = new Node<T> *[ts];
+            for(int i=0; i<ts; i++){
+                buckets[i] = NULL;
+            }
+            // read the element from old and save to new
+            for(int i=0; i<oldTs; i++){
+                Node<T> *temp = oldbuckets[i];
+                if(temp){
+                    while(temp){
+                        insert(temp->key, temp->value);
+                        temp = temp->next;
+                    }
+                    // delete the old ith bucket linked list
+                    delete oldbuckets[i];
+                }
+            }
+            // delete oldbuckets
+            delete []oldbuckets;
+        }
     public:
         HashTable(int ds=7){// min. table size 7 if not given
             cs = 0;
@@ -47,6 +75,13 @@ class HashTable{
             Node<T> *n = new Node<T>(key, value);
             n->next = buckets[index];
             buckets[index] = n;
+            // considering load factor
+            cs++;
+            float load_factor = (float) cs/ts;
+            if(load_factor > 0.7){
+                cout<<"Load factor is "<<load_factor<<endl;
+                rehash();
+            }
         }
         void print(){
             // bucket
@@ -78,6 +113,7 @@ class HashTable{
             // first element
             if(temp and temp->key == key){
                 buckets[index] = temp->next;
+                temp->next = NULL; // for destructor
                 delete temp;
                 return;
             }
@@ -100,16 +136,17 @@ class HashTable{
 };
 
 int main(){
-    HashTable <int>t(11);
+    HashTable <int>t;
     // fruit->price
     // insert
     t.insert("Mango", 100);
     t.insert("Apple", 120);
     t.insert("Guava", 140);
     t.insert("Banana", 130);
-    t.insert("Chiku", 150);
-    t.print();
-    // search
+    t.print(); 
+    t.insert("Chiku", 150); // load factor to rehash
+    
+    //search
     int *price = t.search("Chikdu");
     if(price)
         cout<<"Price is "<<*price<<endl;
@@ -118,6 +155,6 @@ int main(){
     // delete
     t.erase("Guava");
     t.print();
-
+    
     return 0;
 }
