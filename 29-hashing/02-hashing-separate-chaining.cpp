@@ -133,6 +133,19 @@ class HashTable{
             }
 
         }
+        // insert, update, get using [].
+        T& operator[](string key){
+            T* temp = search(key);
+            if(!temp){ // not found
+                // insertion
+                T garbage;
+                insert(key, garbage);
+                T*  value = search(key); // address of box, containing garbage used to insert new value
+                return *value;
+            }
+            return *temp; // return box of value
+            // as reference is return it can be used to update the value.
+        }
 };
 
 int main(){
@@ -140,7 +153,6 @@ int main(){
     // fruit->price
     // insert
     t.insert("Mango", 100);
-    t.insert("Apple", 120);
     t.insert("Guava", 140);
     t.insert("Banana", 130);
     t.print(); 
@@ -155,6 +167,10 @@ int main(){
     // delete
     t.erase("Guava");
     t.print();
-    
+    // insert and update
+    t["Apple"] =120;
+    t["Mango"]=200;
+    t.print();
+
     return 0;
 }
