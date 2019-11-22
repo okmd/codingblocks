@@ -27,6 +27,25 @@ void intersectionLL(list <int> LL1, list <int> LL2){
         }
     }
 }
+// for duplicate value
+void intersectionLL2(list <int> LL1, list <int> LL2){
+    map<int, int> m;// value->count
+    map<int, int> res;// value->count
+    for(auto x:LL1){
+        m[x]++;
+    }
+    for(auto x:LL2){
+        if(m[x]){ // if count>0 
+            res[x]++;
+            m[x]--;
+        }
+    }
+    // now print
+    for(auto x:res){ // each value
+        for(int i=0; i<x.second; i++) // duplicate, count
+            cout<<x.first<<", ";
+    }
+}
 
 int main(){
     list <int> l1, l2; 
