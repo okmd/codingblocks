@@ -22,7 +22,7 @@ int main(){
         sort(activity.begin(), activity.end(), cmp);
         // 2. 
         int fin = activity[0].second; // activity with least finish time.
-        for(int i=0; i<activity.size(); i++){
+        for(int i=1; i<activity.size(); i++){
             if(activity[i].first >= fin){ // if not collide
                 fin = activity[i].second;
                 res++;
