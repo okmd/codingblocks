@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Grapgh{
+class Graph{
 private:
 	int V;
 	list<int> *l;
 
 public:
-	Grapgh(int v){
+	Graph(int v){
 		V = v;
 		l = new list<int>[V]; // array of linked list
 	}
@@ -29,7 +29,7 @@ public:
 };
 
 int main(){
-	Grapgh g(5); //0 to 4
+	Graph g(5); //0 to 4
 	g.addEdge(0,1);
 	g.addEdge(0,4);
 	g.addEdge(4,3);
