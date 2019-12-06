@@ -1,9 +1,9 @@
-#include <iostream>
 #include<bits/stdc++.h>
 using namespace std;
+
 template <typename T>
 class Graph{
-    unordered_map<T, list<pair<T, int>>> m; // {Delhi->[(Mumbai, 2), (Pune, 4)]}
+    unordered_map<T, list<pair<T, int> > > m; // {Delhi->[(Mumbai, 2), (Pune, 4)]}
     public:
     void addEdge(T u, T v, int dist, bool bidir=true){
         m[u].push_back(make_pair(v,dist));
@@ -78,3 +78,22 @@ int main() {
 
     return 0;
 }
+
+/*
+Single source shortest path algorithm.
+From single source calculate shortest path to all the nodes.
+Edges can be bi or uni-directional edges.
+It uses weighted graph.
+Adjacency list is most efficient way.
+
+
+Algo:
+    -> all nodes have INF distance except source.
+    -> use priority queue(hashmap) or set.
+    -> distance of node = distance of parent + weight (min).
+    -> pick node with min distance from the set<node, distance>.
+    -> set is sorted accoring to distance.
+    -> to update in set -> remove then insert new pair.
+
+Complexity: O(ElogV)
+*/
