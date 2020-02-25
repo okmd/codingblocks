@@ -6,18 +6,25 @@ int dp[100][2];
 int bs(int n, int last_digit){
     if(dp[n][last_digit]) return dp[n][last_digit];
     if(last_digit==0){
-        dp[n][0] = bs(n-1, 0) + bs(n-1, 1);
+        dp[n][0] = bs(n-1, 0) + bs(n-1, 1); // all previous strings that ends with 0 or 1
     }
     else{
-        dp[n][1] = bs(n-1, 0);
+        dp[n][1] = bs(n-1, 0); // all previous string that ends with 0 not 1 as this string ends with 1.
     }
     return dp[n][last_digit];
+	// or
+	// dp[n][last_digit] = (last_digit==0)? bs(n-1, 0) + bs(n-1, 1) : bs(n-1, 0);
+
 }
+
 int main(){
     dp[1][0]=dp[1][1]=1;
-    int n;
-    cin>>n;
-    cout<<bs(n,0)+bs(n,1);
+    int t,n;
+	cin>>t;
+	while(t--){
+		cin>>n;
+		cout<<bs(n,0)+bs(n,1)<<endl;
+	}
     return 0;
 }
 
