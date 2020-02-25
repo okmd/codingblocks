@@ -28,19 +28,18 @@ void print_lcs(char x[], char y[]){
     char ans[100];
     int k = 0; 
     cout<<"Index[x, y]: ";
-    for(int i=m; i>=0;){
-        for(int j=n; j>=0;){
-            if(dp[i-1][j]==dp[i][j-1] and dp[i-1][j-1]!=dp[i][j]){
-                ans[k++]=x[i-1];
-                cout<<"["<<(i-1)<<", "<<(j-1)<<"]";
-                i--;
+    int i=m, j=n;
+    while(i>0 and j>0){
+        if(dp[i-1][j]==dp[i][j-1] and dp[i-1][j-1]!=dp[i][j]){
+            ans[k++]=x[i-1];
+            cout<<"["<<(i-1)<<", "<<(j-1)<<"]";
+            i--;
+            j--;
+        }else{
+            if(dp[i-1][j] < dp[i][j-1]){
                 j--;
             }else{
-                if(dp[i-1][j] < dp[i][j-1]){
-                    j--;
-                }else{
-                    i--;
-                }
+                i--;
             }
         }
     }
